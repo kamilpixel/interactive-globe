@@ -84,3 +84,15 @@ body {
   height: 100%;
   background: radial-gradient(circle at center, #4040f2, #020231);
 }
+
+.logo-container {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: 14rem;
+  height: 2rem;
+  background-image: url('/logo_white.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
