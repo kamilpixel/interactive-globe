@@ -21,8 +21,6 @@ const main = () => {
   controls.update();
 
   const scene = new THREE.Scene();
-  // scene.background = new THREE.Color('#000');
-
   const loader = new THREE.TextureLoader();
   const texture = loader.load(earthImage);
   const geometry = new THREE.SphereGeometry(1, 64, 32);
@@ -40,45 +38,41 @@ const main = () => {
     countryInfos = await loadJSON("/data/locations.json");
     const lonFudge = Math.PI * 1.5;
     const latFudge = Math.PI;
+
     const lonHelper = new THREE.Object3D();
     const latHelper = new THREE.Object3D();
     lonHelper.add(latHelper);
+
     const positionHelper = new THREE.Object3D();
     positionHelper.position.z = 1;
     latHelper.add(positionHelper);
 
     const labelParentElem = document.querySelector("#labels");
-    for (const countryInfo of countryInfos) {
-      const { lat, lon, min, max, name } = countryInfo;
-      lonHelper.rotation.y = THREE.MathUtils.degToRad(lon) + lonFudge;
-      latHelper.rotation.x = THREE.MathUtils.degToRad(lat) + latFudge;
+    for (const loc of countryInfos) {
+      const { latitude, longitude, location_name, branch_url } = loc;
+      lonHelper.rotation.y = THREE.MathUtils.degToRad(longitude) + lonFudge;
+      latHelper.rotation.x = THREE.MathUtils.degToRad(latitude) + latFudge;
       positionHelper.updateWorldMatrix(true, false);
       const position = new THREE.Vector3();
       positionHelper.getWorldPosition(position);
-      countryInfo.position = position;
-
-      const width = max[0] - min[0];
-      const height = max[1] - min[1];
-      const area = width * height;
-      countryInfo.area = area;
+      loc.position = position;
 
       // Clone label-container template
       const elem = document.createElement("div");
       const labelContainer = document.querySelector(".label-container");
       const elemChild = labelContainer.cloneNode(true);
       elemChild.style.display = "";
-      elemChild.querySelector(".country-name").textContent = name;
+      elemChild.querySelector(".country-name").textContent = location_name;
 
       // Make the cloned label clickable by attaching a listener to the inner container
       elem.appendChild(elemChild);
       elemChild.addEventListener("click", (e) => {
         e.stopPropagation();
-        console.log("country clicked:", name, countryInfo);
-        alert(name);
+        window.open(branch_url, "_blank");
       });
 
       labelParentElem.appendChild(elem);
-      countryInfo.elem = elem;
+      loc.elem = elem;
     }
 
     requestRenderIfNotRequested();
