@@ -22,11 +22,13 @@ const main = () => {
 
   const scene = new THREE.Scene();
   const loader = new THREE.TextureLoader();
-  const texture = loader.load(earthImage);
-  const geometry = new THREE.SphereGeometry(1, 64, 32);
-  const material = new THREE.MeshBasicMaterial({ map: texture });
-  globe = new THREE.Mesh(geometry, material);
-  scene.add(globe);
+  loader.load(earthImage, (texture) => {
+    const geometry = new THREE.SphereGeometry(1, 64, 32);
+    const material = new THREE.MeshBasicMaterial({ map: texture });
+    globe = new THREE.Mesh(geometry, material);
+    scene.add(globe);
+    render();
+  });
 
   async function loadJSON(url) {
     const req = await fetch(url);
