@@ -1,0 +1,59 @@
+html,
+body {
+  margin: 0;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+}
+#c {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#labels {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 0;
+  color: white;
+}
+#labels > div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  font-size: small;
+  user-select: none;
+  /* pointer-events: none; */
+  text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000,
+    1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+}
+#labels > div:hover {
+  color: red;
+}
+
+.label-container {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.marker-pin {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(238, 91, 6);
+}
+
+.main-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(56, 8, 78);
+}
