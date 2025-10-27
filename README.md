@@ -37,16 +37,3 @@ npm run build
 # Preview production build locally
 npm run preview
 ```
-
-## Project Structure
-
-```
-interactive-globe/
-├── public/           # Static assets and data
-│   └── data/        # JSON data files
-├── src/             # Source code
-│   ├── main.js      # Application entry point
-│   ├── style.css    # Global styles
-│   └── images/      # Image assets
-└── index.html       # HTML entry point
-```
